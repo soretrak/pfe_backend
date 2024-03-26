@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 
+import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import org.soretrak.entities.Plate;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Path("/api")
 public class PlateResource {
+    private Logger LOGGER = Logger.getLogger(PlateResource.class);
 
     @Inject
     PlateRepository plateRepository;
@@ -36,6 +38,8 @@ public class PlateResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getAll() throws IOException, SQLException {
+
+        LOGGER.info("getting all plates data ");
         // Retrieve the image data from the database
         List<Plate> plates = plateRepository.getPlates();
 
@@ -78,6 +82,7 @@ public class PlateResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA + ";charset=utf-8")
     @Transactional
     public Response uploadData(@MultipartForm PlateFormData form) {
+        LOGGER.info("inserting plate data ");
         try {
             // // Read the image data from the input stream
             // byte[] imageData = imageDataStream.readAllBytes();
@@ -85,6 +90,8 @@ public class PlateResource {
             // Read the image data from the form
             InputStream imageDataStream = form.getFile();
             byte[] imageData = imageDataStream.readAllBytes();
+
+            LOGGER.info("inserting plate data " + form.toString());
 
             // Save the image data in the database
             plateRepository.savePlateData(imageData, form.getPlateNumber());

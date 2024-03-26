@@ -33,7 +33,7 @@ public class PlateRepository implements PanacheRepository<Plate>{
 
         try (Connection connection = dataSource.getConnection()) {
 
-            String sqlQuery = " select id, plate_number , date_insert from palte order by date_insert asc ";
+            String sqlQuery = " select id, plate_number , date_insert from plate order by date_insert asc ";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
 
@@ -84,7 +84,7 @@ public class PlateRepository implements PanacheRepository<Plate>{
     }
 
     @Transactional
-    public InputStream getImageData(Long id) throws SQLException {
+    public InputStream getImageDataById(Long id) throws SQLException {
         // Retrieve the ImageEntity from the database
         Plate imageEntity = entityManager.find(Plate.class, id);
 

@@ -71,6 +71,9 @@ public class EmployeeResource {
         data.nom = formData.nom;
         data.file = imageData;
 
+
+        LOGGER.info("create employee data " + data.toString());
+
         String result = employeeRepository.createPhotov2(data);
         if (result.compareTo("Record Inserted successsfully") == 0) {
             return Response.status(Status.CREATED).build();

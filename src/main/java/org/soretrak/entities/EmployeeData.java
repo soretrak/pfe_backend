@@ -60,6 +60,12 @@ public class EmployeeData {
         this.file = file;
     }
 
+
+    @Override
+    public String toString() {
+        return "EmployeeData [matric=" + matric + ", prenom=" + prenom + ", nom=" + nom + "]";
+    }
+
     
     
 }

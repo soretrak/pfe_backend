@@ -13,16 +13,15 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "plate")
-public class Plate {
-
+@Table(name = "detection")
+public class ObjectDetection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "plate_number")
-    private String plateNumber;
+    @Column(name = "camera_id")
+    private String cameraId;
 
     @Column(name = "date_insert", columnDefinition = "Date DEFAULT sysdate", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -33,24 +32,21 @@ public class Plate {
     private byte[] imageData;
 
 
-    public Plate() {
-       
-    }
+
     
-   
+    public ObjectDetection() {
+    }
 
-
-
-    public Plate(Long id, String plateNumber, Date dateInsert) {
+    public ObjectDetection(Long id, String cameraId, Date dateInsert) {
         this.id = id;
-        this.plateNumber = plateNumber;
+        this.cameraId = cameraId;
         this.dateInsert = dateInsert;
     }
 
-    public Plate(Long id, String plateNumber, Date date_presence, byte[] imageData) {
+    public ObjectDetection(Long id, String cameraId, Date dateInsert, byte[] imageData) {
         this.id = id;
-        this.plateNumber = plateNumber;
-        this.dateInsert = date_presence;
+        this.cameraId = cameraId;
+        this.dateInsert = dateInsert;
         this.imageData = imageData;
     }
 
@@ -62,20 +58,20 @@ public class Plate {
         this.id = id;
     }
 
-    public String getPlateNumber() {
-        return plateNumber;
+    public String getCameraId() {
+        return cameraId;
     }
 
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
+    public void setCameraId(String cameraId) {
+        this.cameraId = cameraId;
     }
 
     public Date getDateInsert() {
         return dateInsert;
     }
 
-    public void setDateInsert(Date date_presence) {
-        this.dateInsert = date_presence;
+    public void setDateInsert(Date dateInsert) {
+        this.dateInsert = dateInsert;
     }
 
     public byte[] getImageData() {
@@ -86,9 +82,11 @@ public class Plate {
         this.imageData = imageData;
     }
 
+    @Override
+    public String toString() {
+        return "ObjectDetection [id=" + id + ", cameraId=" + cameraId + ", dateInsert=" + dateInsert + "]";
+    }
 
-
-
-   
+    
     
 }
