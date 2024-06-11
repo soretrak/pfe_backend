@@ -17,6 +17,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -96,6 +97,21 @@ public class EmployeeResource {
         }
         return Response.status(Status.NOT_FOUND).build();
      
+
+    }
+
+    @GET
+    @Path("/employeequery")
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public Response getEmployeeByQuery(@QueryParam("matric") Integer matric) {
+        LOGGER.debug("get data employee " + matric);
+
+        Employee employee = employeeRepository.getEmployeeByMatric(matric);
+        if (employee.getMatric() != null) {
+            return Response.ok(employee).build();
+        }
+        return Response.status(Status.NOT_FOUND).build();
 
     }
 
